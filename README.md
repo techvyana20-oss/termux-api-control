@@ -27,14 +27,6 @@ bash install.sh
 
 ```
 
-## 📡 Send Reports to Telegram
-Edit `send_report_to_telegram.sh` with your bot token and chat ID:
-```bash
-BOT_TOKEN="your_bot_token_here"
-CHAT_ID="your_chat_id_here"
-bash send_report_to_telegram.sh
-```
-
 ## 🧠 Coming Soon
 - Location tracking via Termux API
 - Contact listing
