@@ -13,12 +13,18 @@ In this project, learn how to create your own Termux-powered toolkit — combini
 
 ## ⚙️ Installation
 ```bash
+# 🔧 Termux API Control Installation
 pkg update -y && pkg upgrade -y
 pkg install -y git curl zip termux-api
+
+# 📥 Clone the Repository
 git clone https://github.com/techvyana20-oss/termux-api-control.git
-cd TechVyana-TermuxToolkit
+cd termux-api-control
+
+# 🚀 Run Installer
 chmod +x install.sh
 bash install.sh
+
 ```
 
 ## 📡 Send Reports to Telegram
