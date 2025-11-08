@@ -15,7 +15,7 @@ In this project, learn how to create your own Termux-powered toolkit — combini
 ```bash
 pkg update -y && pkg upgrade -y
 pkg install -y git curl zip termux-api
-git clone https://github.com/TechVyana/TechVyana-TermuxToolkit
+git clone https://github.com/techvyana20-oss/termux-api-control.git
 cd TechVyana-TermuxToolkit
 chmod +x install.sh
 bash install.sh
