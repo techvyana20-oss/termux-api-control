@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# install_termuxapi.sh (Final Updated Version)
+# install_termuxapi.sh (Final User-Input Version)
 set -e
 echo "Installing Termux-API Toolkit dependencies..."
 pkg update -y && pkg upgrade -y
@@ -18,20 +18,15 @@ DIR="$(cd "$(dirname "$0")" && pwd)"
 OUTROOT="$HOME/TermuxAPI_Reports"
 OUTDIR="$OUTROOT/$(date +%F_%H%M%S)"
 mkdir -p "$OUTDIR"
-CFG="$DIR/config.txt"
 
 function pause(){ read -p "Press ENTER to continue..."; }
 
 function send_to_telegram(){
-  if [ ! -f "$CFG" ]; then
-    echo "⚙️  Enter your Telegram Bot details:"
-    read -p "BOT_TOKEN: " BOT_TOKEN
-    read -p "CHAT_ID: " CHAT_ID
-    echo "BOT_TOKEN=$BOT_TOKEN" > "$CFG"
-    echo "CHAT_ID=$CHAT_ID" >> "$CFG"
-  else
-    source "$CFG"
-  fi
+  echo "=============================="
+  echo "📤 Send Report to Telegram"
+  echo "=============================="
+  read -p "Enter your Telegram Bot Token: " BOT_TOKEN
+  read -p "Enter your Telegram Chat ID: " CHAT_ID
 
   LATEST=$(ls -dt $OUTROOT/*/ 2>/dev/null | head -n1)
   ZIPFILE="$OUTROOT/latest_report.zip"
@@ -81,82 +76,67 @@ while true; do
     1)
       echo "[*] Battery status:"
       termux-battery-status | jq . | tee "$OUTDIR/battery.json"
-      pause
-      ;;
+      pause ;;
     2)
       echo "🚧 Location feature coming soon..."
-      pause
-      ;;
+      pause ;;
     3)
       echo "[*] Taking photo (camera)..."
       F="$OUTDIR/photo_$(date +%s).jpg"
       termux-camera-photo -c 0 "$F" && echo "Saved: $F"
-      pause
-      ;;
+      pause ;;
     4)
       echo "[*] Recording 8s audio (mic)..."
       F="$OUTDIR/rec_$(date +%s).3gp"
       termux-microphone-record -l 8 -o "$F" && echo "Saved: $F"
-      pause
-      ;;
+      pause ;;
     5)
       read -p "Enter text to speak: " T
       termux-tts-speak "$T"
       echo "Spoken: $T"
-      pause
-      ;;
+      pause ;;
     6)
       echo "[*] Listening (speech-to-text)... Speak now."
       termux-speech-to-text > "$OUTDIR/stt_$(date +%s).txt"
       echo "Captured:"
       cat "$OUTDIR/"*.txt
-      pause
-      ;;
+      pause ;;
     7)
       read -p "Enter destination phone number (with country code): " NUM
       read -p "Enter message text: " MSG
       echo "[!] Sending SMS to $NUM (test only)"
       termux-sms-send -n "$NUM" "$MSG"
       echo "Sent (may be logged on device)."
-      pause
-      ;;
+      pause ;;
     8)
       echo "🚧 Contacts feature coming soon..."
-      pause
-      ;;
+      pause ;;
     9)
       read -p "Notification title: " NT
       read -p "Notification text: " NX
       termux-notification --title "$NT" --content "$NX" --id 1
       echo "Notification created"
-      pause
-      ;;
+      pause ;;
     10)
       echo "🚧 Vibrate feature coming soon..."
-      pause
-      ;;
+      pause ;;
     11)
       read -p "URL to open (http...): " URL
       termux-open-url "$URL"
       echo "Opened $URL"
-      pause
-      ;;
+      pause ;;
     12)
       echo "[*] Clipboard text:"
       termux-clipboard-get | tee "$OUTDIR/clipboard.txt"
-      pause
-      ;;
+      pause ;;
     13)
-      send_to_telegram
-      ;;
+      send_to_telegram ;;
     14)
       echo "👋 Goodbye."
-      exit 0
-      ;;
+      exit 0 ;;
     *)
       echo "Invalid option."
-      sleep 1
-      ;;
+      sleep 1 ;;
   esac
 done
 TOOL
