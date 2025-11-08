@@ -25,6 +25,21 @@ cd termux-api-control
 chmod +x install.sh
 bash install.sh
 
+# Launch the Toolkit After successful installation, run:
+bash ~/termuxapi_toolkit/termuxapi_toolkit.sh
+
+⚡ Optional (Create Shortcut Command)
+
+To make it easier, add a shortcut so you can just type toolkit next time:
+
+echo 'alias toolkit="bash ~/termuxapi_toolkit/termuxapi_toolkit.sh"' >> ~/.bashrc
+source ~/.bashrc
+
+
+Now simply run:
+
+toolkit
+
 ```
 
 ## 🧠 Coming Soon
