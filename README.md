@@ -1,4 +1,4 @@
-# TechVyana-TermuxToolkit
+# TechVyana2.0-TermuxToolkit
 
 Build Your Own OSINT & Termux API Toolkit 🔍
 
